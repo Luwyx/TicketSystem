@@ -5,7 +5,7 @@
 <!-- HTML goes here -->
 <main>
 	<body>
-		<h1>Fovo Fynsk</h1>
+		<h1>Welcome to Tickets</h1>
 		<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 	</body>
 </main>

@@ -1,10 +1,18 @@
+<script>
+	import { goto } from '$app/navigation';
+
+	function navigate(path) {
+		goto(path);
+	}
+</script>
+
 <div class="Sidebar">
 	<h1>Fovo Fynsk</h1>
 	<nav>
-		<a href="/User">User</a>
+		<a href="/user">User</a>
 		<a href="/tickets">Tickets</a>
-		<a href="/Sla">SLA</a>
-		<a href="/Faq">FAQ</a>
+		<a href="/sla">SLA</a>
+		<a href="/faq">FAQ</a>
 	</nav>
 </div>
 
@@ -13,8 +21,11 @@
 
 	.Sidebar {
 		background-color: #333;
-		height: 100vh;
-		margin: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 15vh;
+		padding: 15%;
 	}
 
 	nav {
@@ -22,7 +33,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: 15%;
+		gap: 10vh;
 		/* padding: 0 100px 0; */
 		height: max-content;
 	}
@@ -49,5 +60,6 @@
 		font-family: 'Space mono', monospace;
 		font-weight: 700;
 		font-size: 30px;
+		box-sizing: border-box;
 	}
 </style>

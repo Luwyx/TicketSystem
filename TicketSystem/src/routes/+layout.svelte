@@ -1,10 +1,11 @@
 <script>
 	import Navbar from '../lib/navbar.svelte';
+	import Topbar from '../lib/topbar.svelte';
 </script>
 
 <div class="grid-container">
 	<div class="topbar">
-		<p>Sidebar content here</p>
+		<Topbar />
 	</div>
 	<div class="sidebar">
 		<Navbar />
@@ -24,12 +25,13 @@
 	.topbar {
 		grid-row: 1;
 		grid-column: 2;
+		background-color: #666;
 	}
 	.sidebar {
 		grid-row: 1 / span 2;
 		grid-column: 1;
-		/* background-color: #f4f4f4; */
-		/* padding: 1rem; */
+		background-color: #333;
+		padding: 1rem;
 	}
 	.content {
 		grid-row: 2;
