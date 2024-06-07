@@ -1,8 +1,8 @@
 export async function load({ url }) {
-	let topbarContent = 'Default Sidebar Content';
+	let topbarContent = 'Fovo Fynsk';
 
-	if (url.pathname === '/users') {
-		topbarContent = 'Hi, ' + UserName + '!';
+	if (url.pathname === '/user') {
+		// topbarContent = 'Hi, ' + UserName + '!';
 	} else if (url.pathname === '/tickets') {
 		topbarContent = 'Tickets';
 	} else if (url.pathname === '/sla') {

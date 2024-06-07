@@ -1,11 +1,13 @@
 <script>
 	import Navbar from '../lib/navbar.svelte';
 	import Topbar from '../lib/topbar.svelte';
+
+	export let data;
 </script>
 
 <div class="grid-container">
 	<div class="topbar">
-		<Topbar />
+		<Topbar content={data.topbarContent} />
 	</div>
 	<div class="sidebar">
 		<Navbar />
