@@ -3,12 +3,20 @@
 </script>
 
 <div class="sidebar">
-	<p>{content}</p>
+	<h2>{content}</h2>
 </div>
 
 <style>
 	.sidebar {
 		background-color: #666;
 		height: 15vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	h2 {
+		color: white;
+		font-size: 3em;
 	}
 </style>

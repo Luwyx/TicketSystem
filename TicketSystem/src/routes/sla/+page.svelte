@@ -1,15 +1,12 @@
-<!-- Javascript goes here -->
 <script>
+	export let data;
 </script>
 
-<!-- HTML goes here -->
-<main>
-	<body>
-		<h1>Welcome to SLA</h1>
-		<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-	</body>
-</main>
-
-<!-- CSS goes here -->
-<style>
-</style>
+{#if data}
+	<h2>{data.header}</h2>
+	<p>{data.text}</p>
+	<p>{data.createData}</p>
+	<p>{data.version}</p>
+{:else}
+	<p>No data available</p>
+{/if}

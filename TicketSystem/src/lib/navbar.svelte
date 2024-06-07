@@ -17,8 +17,6 @@
 </div>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
 	.Sidebar {
 		background-color: #333;
 		display: flex;
@@ -41,9 +39,6 @@
 	a {
 		color: white;
 		cursor: pointer;
-		font-family: 'Space mono', monospace;
-		font-weight: 400;
-		font-style: normal;
 		font-size: large;
 		text-decoration: none;
 		padding: 5px;
