@@ -1,5 +1,5 @@
 import { json } from '@sveltejs/kit';
-import { connection } from '../db'; // Adjusted the import path
+import { connection } from '../db';
 
 // This file is to get a list of all FAQ
 export async function GET() {
@@ -26,4 +26,5 @@ async function getUser(userId = null) {
         throw error;
     }
 }
+export { getUser };
 
