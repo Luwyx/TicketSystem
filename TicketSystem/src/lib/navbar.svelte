@@ -7,7 +7,7 @@
 </script>
 
 <div class="Sidebar">
-	<h1>Fovo Fynsk</h1>
+	<h1> <a class="Title" href="./">Fovo Fynsk</a></h1>
 	<nav>
 		<a href="/user">User</a>
 		<a href="/tickets">Tickets</a>
@@ -39,7 +39,7 @@
 	a {
 		color: white;
 		cursor: pointer;
-		font-size: large;
+		font-size: larger;
 		text-decoration: none;
 		padding: 5px;
 	}
@@ -53,8 +53,12 @@
 	h1 {
 		color: white;
 		font-family: 'Space mono', monospace;
-		font-weight: 700;
-		font-size: 30px;
 		box-sizing: border-box;
+	}
+
+	.Title {
+		font-size: 30px;
+		font-weight: 700;
+		padding: 0;
 	}
 </style>

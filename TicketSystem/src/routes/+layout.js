@@ -3,6 +3,7 @@ export async function load({ url }) {
 
 	if (url.pathname === '/user') {
 		// topbarContent = 'Hi, ' + UserName + '!';
+		topbarContent = 'Users';
 	} else if (url.pathname === '/tickets') {
 		topbarContent = 'Tickets';
 	} else if (url.pathname === '/sla') {
