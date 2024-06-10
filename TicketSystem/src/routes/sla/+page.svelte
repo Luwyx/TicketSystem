@@ -1,20 +1,34 @@
 <script>
-	let data;
-  
+	import { onMount } from 'svelte';
+
+	let data = null;
+	let error = null;
+
 	async function fetchData() {
-	  const response = await fetch('/api/sla'); // Your API endpoint
-	  data = await response.json();
+		try {
+			const response = await fetch('/api/sla'); // Your API endpoint
+			if (!response.ok) {
+				throw new Error('Network response was not ok');
+			}
+			const tempData = await response.json();
+			data = tempData[0];
+		} catch (err) {
+			error = 'Fetch error: ' + err.message;
+		}
 	}
-  
-	fetchData(); // Call the function to fetch data when the component is initialized
-  </script>
-  
-  {#if data}
-	<h2>{data.header}</h2>
+
+	onMount(() => {
+		fetchData();
+	});
+</script>
+
+{#if error}
+	<p>{error}</p>
+{:else if data}
+	<h2>{data.header}</h2> <!-- Assuming data has a title property -->
 	<p>{data.text}</p>
-	<p>{data.createDate}</p>
+	<p>{data.createData}</p>
 	<p>{data.version}</p>
-  {:else}
+{:else}
 	<p>Loading...</p> <!-- Or any loading indicator -->
-  {/if}
-  
+{/if}
