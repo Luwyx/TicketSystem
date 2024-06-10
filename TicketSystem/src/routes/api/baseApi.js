@@ -38,13 +38,14 @@ async function getData(tableName, filterId = null, idField = null) {
 
 
 
+
 // Updata data given the table, id of the row and the data to update in json format with machung headers to the table
-async function updateData(tableName, id, body, idField = 'id') {
-    const fieldsToUpdate = Object.keys(body).map(key => `"${key}" = $${key}`).join(', ');
+async function updateData(tableName, id, idField = 'id', body) {
+    const fieldsToUpdate = Object.keys(body).map((key, index) => `"${key}" = $${index + 2}`).join(', ');
     const query = `UPDATE "${tableName}" SET ${fieldsToUpdate} WHERE "${idField}" = $1`;
     const values = [id, ...Object.values(body)];
-    const result = await connection.query(query, values);
-    return result.rows[0];
+    await connection.query(query, values);
+    return getData(tableName, id, idField);
 }
 
 // Update the field 'isDeleted' with true given the table and id of the row

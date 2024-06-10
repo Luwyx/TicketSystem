@@ -7,8 +7,13 @@ export async function GET() {
 }
 
 // Create a faq
-export async function POST({ params }) {
-    //return json('TEST')
-    return json(params);
-    return json(await createData('faq', 'body'));
+export async function POST({ request }) {
+
+    const body = await request.json();
+    return new Response(JSON.stringify(await createData('faq', body)), {
+        status: 201,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });    
 }
