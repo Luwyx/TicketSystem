@@ -1,21 +1,7 @@
-
-
 import { json } from '@sveltejs/kit';
 import { connection } from './db';
 
 
-async function getData(tableName, filterId = null, idField = null) {
-	const query = `SELECT * FROM "${tableName} WHERE "isDeleted" = false"`;
-	if (filterId !== null && idField !== null) {
-		query += ` WHERE "${idField}" = ${filterId}`
-	}
-	const result = await connection.query();
-	if (result.rows.length > 0) {
-		return result.rows[0];		
-	} else {
-		return null;
-	}
-}
 async function getData(tableName, filterId = null, idField = null) {
     let query = `SELECT * FROM "${tableName}"`;
     // Check if "isDeleted" exists in the table
@@ -25,10 +11,8 @@ async function getData(tableName, filterId = null, idField = null) {
         WHERE table_name = $1 AND column_name = 'isDeleted'
     `;
     // For test at home
-    //const isDeletedColumnExistsResult = await connection.query(isDeletedColumnExistsQuery, [tableName]);
-    //const isDeletedColumnExists = isDeletedColumnExistsResult.rows.length > 0;
-    const isDeletedColumnExists = true;
-
+    const isDeletedColumnExistsResult = await connection.query(isDeletedColumnExistsQuery, [tableName]);
+    const isDeletedColumnExists = isDeletedColumnExistsResult.rows.length > 0;
     // If "isDeleted" column exists, add the condition to the query
     if (isDeletedColumnExists) {
         query += ` WHERE "isDeleted" = false`;
@@ -42,10 +26,11 @@ async function getData(tableName, filterId = null, idField = null) {
             query += ` WHERE "${idField}" = ${filterId}`;
         }
     }
-
+    //return query;
     const result = await connection.query(query);
+
     if (result.rows.length > 0) {
-        return result.rows[0];
+        return result.rows;
     } else {
         return null;
     }

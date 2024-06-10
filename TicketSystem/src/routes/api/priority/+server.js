@@ -1,12 +1,7 @@
 import { json } from '@sveltejs/kit';
-import { connection } from '../db';
+import { getData } from '../baseApi';
+
 
 export  async function GET() {
-    return json(await getPrioritys());
+    return json(await getData('priority'));
 }
-
-
-async function getPrioritys() { 
-    const result = await connection.query('SELECT * FROM priority');
-    return result.rows;
-  }
