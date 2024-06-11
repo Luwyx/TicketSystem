@@ -21,20 +21,19 @@
 	.grid-container {
 		display: grid;
 		grid-template-rows: 15vh 1fr;
-		grid-template-columns: 20vw 1fr;
+		grid-template-columns: max-content 1fr;
 		min-height: 100vh;
 	}
 	.topbar {
 		grid-row: 1;
 		grid-column: 2;
 		background-color: #666;
-		position: sticky;
 	}
 	.sidebar {
 		grid-row: 1 / span 2;
 		grid-column: 1;
 		background-color: #333;
-		padding: 1rem;
+		padding: 2rem;
 	}
 	.content {
 		grid-row: 2;

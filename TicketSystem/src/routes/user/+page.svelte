@@ -45,15 +45,27 @@
 			</div>
 			<hr />
 			<div class="userinfo">
-                <p>Name: {#if data !== null && data.firstName !== null && data.lastName !== null}{data.firstName + ' ' + data.lastName}{:else}N/A{/if}</p>
-                <p>Email: {#if data !== null && data.email !== null}{data.email}{:else}N/A{/if}</p>
-                <p>Work Phone: {#if data !== null && data.workPhone !== null}{data.workPhone}{:else}N/A{/if}</p>
-                <p>Private Phone: {#if data !== null && data.privatePhone !== null}{data.privatePhone}{:else}N/A{/if}</p>
-            </div>
+				<p>
+					Name: {#if data !== null && data.firstName !== null && data.lastName !== null}{data.firstName +
+							' ' +
+							data.lastName}{:else}N/A{/if}
+				</p>
+				<p>
+					Email: {#if data !== null && data.email !== null}{data.email}{:else}N/A{/if}
+				</p>
+				<p>
+					Work Phone: {#if data !== null && data.workPhone !== null}{data.workPhone}{:else}N/A{/if}
+				</p>
+				<p>
+					Private Phone: {#if data !== null && data.privatePhone !== null}{data.privatePhone}{:else}N/A{/if}
+				</p>
+			</div>
 			<hr />
 			<div class="tickets">
-				<h3>Current Tickets:</h3>
-				<h3>{#if data !== null && data.total_open_tickets !== null}{data.total_open_tickets}{:else}N/A{/if}</h3>
+				<p>Current Tickets:</p>
+				<p>
+					{#if data !== null && data.total_open_tickets !== null}{data.total_open_tickets}{:else}N/A{/if}
+				</p>
 			</div>
 		</div>
 	</body>
@@ -64,11 +76,13 @@
 	.userspacer {
 		display: flex;
 		flex-direction: column;
+		gap: 10px;
 	}
 
 	.user {
 		display: flex;
 		align-items: center;
+		gap: 20px;
 	}
 
 	.iconholder {
@@ -77,5 +91,13 @@
 
 	.tickets {
 		display: flex;
+	}
+
+	h2 {
+		font-size: 2em;
+	}
+
+	p {
+		font-size: 1.5em;
 	}
 </style>

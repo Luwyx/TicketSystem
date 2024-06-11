@@ -22,7 +22,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 15vh;
+		gap: 10vh;
 		padding: 15%;
 	}
 
@@ -31,7 +31,7 @@
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: 10vh;
+		gap: 8vh;
 		/* padding: 0 100px 0; */
 		height: max-content;
 	}
@@ -39,9 +39,11 @@
 	a {
 		color: white;
 		cursor: pointer;
-		font-size: larger;
+		font-size: 30px;
 		text-decoration: none;
 		padding: 5px;
+		text-align: center;
+		text-wrap: nowrap;
 	}
 
 	a:hover {
@@ -54,10 +56,11 @@
 		color: white;
 		font-family: 'Space mono', monospace;
 		box-sizing: border-box;
+		text-align: center;
 	}
 
 	.Title {
-		font-size: 30px;
+		font-size: 40px;
 		font-weight: 700;
 		padding: 0;
 	}
