@@ -2,26 +2,12 @@
 <script>
 	//import { SetTopbarContent } from '../+layout.svelte';
 	import { onMount } from 'svelte';
+    import { user } from '../../stores.js';
+    
 	let data = null;
-	let error = null;
 
-	async function fetchData() {
-		try {
-			const response = await fetch('/api/users/2'); // Your API endpoint
-			if (!response.ok) {
-				throw new Error('Network response was not ok');
-			}
-			const tempData = await response.json();
-
-			data = tempData[0];
-			console.log(data);
-		} catch (err) {
-			error = 'Fetch error: ' + err.message;
-		}
-	}
-
-	onMount(() => {
-		fetchData();
+    user.subscribe(value => {
+		data = value;
 	});
 </script>
 

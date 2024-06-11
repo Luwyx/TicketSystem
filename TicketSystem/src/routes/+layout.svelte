@@ -2,6 +2,7 @@
 	import Navbar from '../lib/navbar.svelte';
 	import Topbar from '../lib/topbar.svelte';
 
+
 	export let data;
 </script>
 
