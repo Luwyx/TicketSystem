@@ -24,10 +24,21 @@
 {#if error}
 	<p>{error}</p>
 {:else if data}
-	<h2>{data.header}</h2> <!-- Assuming data has a title property -->
+	<h2>{data.header}</h2>
+	<!-- Assuming data has a title property -->
 	<p>{@html data.text}</p>
-	<p>{data.createData}</p>
-	<p>{data.version}</p>
+	<div>
+		<p>{data.createData}</p>
+		<p>{data.version}</p>
+	</div>
 {:else}
-	<p>Loading...</p> <!-- Or any loading indicator -->
+	<p>Loading...</p>
+	<!-- Or any loading indicator -->
 {/if}
+
+<style>
+	div {
+		display: flex;
+		justify-content: space-between;
+	}
+</style>
