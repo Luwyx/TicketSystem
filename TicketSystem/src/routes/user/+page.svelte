@@ -7,7 +7,7 @@
 
 	async function fetchData() {
 		try {
-			const response = await fetch('/api/users/1'); // Your API endpoint
+			const response = await fetch('/api/users/2'); // Your API endpoint
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}
@@ -34,25 +34,14 @@
                 <!-- Placeholder for username -->
             </div>
             <div class="userinfo">
-                {#if data !== null}
-                <p>Name: {data.firstName + ' ' + data.lastName}</p>
-                <p>Email: {data.email}</p>
-                <p>Work Phone: {data.workPhone}</p>
-                <p>Private Phone: {data.privatePhone}</p>
-                {:else}
-                <p>Name: N/A</p>
-                <p>Email: N/A</p>
-                <p>Work Phone: N/A</p>
-                <p>Private Phone: N/A</p>
-                {/if}
+                <p>Name: {#if data !== null && data.firstName !== null && data.lastName !== null}{data.firstName + ' ' + data.lastName}{:else}N/A{/if}</p>
+                <p>Email: {#if data !== null && data.email !== null}{data.email}{:else}N/A{/if}</p>
+                <p>Work Phone: {#if data !== null && data.workPhone !== null}{data.workPhone}{:else}N/A{/if}</p>
+                <p>Private Phone: {#if data !== null && data.privatePhone !== null}{data.privatePhone}{:else}N/A{/if}</p>
             </div>
             <div>
                 <h2>Current Tickets!</h2>
-                {#if data !== null}
-                <h3>{data.total_open_tickets}</h3>
-                {:else}
-                <h3>N/A</h3>
-                {/if}
+                <h3>{#if data !== null && data.total_open_tickets !== null}{data.total_open_tickets}{:else}N/A{/if}</h3>
             </div>
         </div>
     </body>
