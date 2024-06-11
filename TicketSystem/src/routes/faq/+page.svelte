@@ -26,11 +26,12 @@
 <!-- HTML goes here -->
 <main>
 	<body>
-		<h1>Welcome to FAQ</h1>
+		<h2>Welcome to FAQ</h2>
+		<br />
 		{#if error}
 			<p>{error}</p>
 		{:else}
-			<div class="faqFlex">
+			<div class="faqGrid">
 				<!-- Insert tickets here -->
 				{#each data as faq}
 					<article>
@@ -47,14 +48,28 @@
 
 <!-- CSS goes here -->
 <style>
-
-	.faqFlex {
-		display: flex;
+	.faqGrid {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-auto-rows: 1fr;
+		gap: 10px;
 	}
 
 	article {
-		border: 3px solid #333;
-		border-radius: 5px;
-		
+		border: 3px solid #666;
+		border-radius: 10px;
+		padding: 10px;
+		aspect-ratio: calc(1 / 1);
+		background-color: #666;
+	}
+
+	h2 {
+		text-align: center;
+		font-size: 30px;
+	}
+
+	h3,
+	p {
+		color: white;
 	}
 </style>
