@@ -42,4 +42,9 @@
 		display: flex;
 		justify-content: space-between;
 	}
+
+	h2 {
+		font-size: 40px;
+		font-weight: 700;
+	}
 </style>

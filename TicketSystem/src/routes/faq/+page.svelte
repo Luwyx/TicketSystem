@@ -7,6 +7,14 @@
 	<body>
 		<h1>Welcome to FAQ</h1>
 		<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+		<section>
+			<!-- content goes here -->
+			<article>
+				<h3>header</h3>
+				<p>text</p>
+				<p>time</p>
+			</article>
+		</section>
 	</body>
 </main>
 
