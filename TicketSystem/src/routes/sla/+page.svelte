@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { format } from 'date-fns';
 	let data = null;
 	let error = null;
 
@@ -28,7 +29,7 @@
 	<!-- Assuming data has a title property -->
 	<p>{@html data.text}</p>
 	<div>
-		<p>{data.createData}</p>
+		<p>{format(new Date(data.createData), 'dd-MM-yyyy HH:mm')}</p>
 		<p>{data.version}</p>
 	</div>
 {:else}
