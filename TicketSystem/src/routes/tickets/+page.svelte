@@ -8,7 +8,7 @@
 	async function fetchData() {
 		try {
 			const response = await fetch('/api/tickets'); // Your API endpoint
-			
+
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}
@@ -33,6 +33,7 @@
 			<div class="ticketFlex">
 				<!-- Insert tickets here -->
 				{#each data as ticket}
+					<hr />
 					<article>
 						<div class="content">
 							<h3>{ticket.header}</h3>
