@@ -10,5 +10,5 @@ export async function GET({ params }) {
         userId = parseInt(id);
     }
     //return json('TEST')
-    return json(await getData('users', userId, 'userId'));
+    return json(await getData('userView', userId, 'userId'));
 }

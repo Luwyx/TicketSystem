@@ -1,5 +1,6 @@
 <!-- Javascript goes here -->
 <script>
+	//import { SetTopbarContent } from '../+layout.svelte';
 </script>
 
 <!-- HTML goes here -->
@@ -11,7 +12,7 @@
 				<!-- <p>{data.text}</p> -->
 				<!-- Placeholder for username -->
 			</div>
-			<div class="userinfo">
+			<div class="userinfo">	
 				<!-- <p>{data.text}</p>
 				<p>{data.createDate}</p>
 				<p>{data.version}</p> -->
@@ -19,6 +20,8 @@
 			</div>
 			<div>
 				<h2>Current Tickets!</h2>
+				
+				<!-- <h2>{data.topbarContent}</h2> -->
 				<!-- <p>{data.text}</p> -->
 				<!-- Place holder again -->
 			</div>
