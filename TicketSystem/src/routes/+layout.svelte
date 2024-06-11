@@ -3,9 +3,6 @@
 	import Topbar from '../lib/topbar.svelte';
 
 	export let data;
-
-
-	
 </script>
 
 <div class="grid-container">
@@ -31,6 +28,7 @@
 		grid-row: 1;
 		grid-column: 2;
 		background-color: #666;
+		position: sticky;
 	}
 	.sidebar {
 		grid-row: 1 / span 2;
