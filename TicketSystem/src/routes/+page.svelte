@@ -8,7 +8,7 @@
 		try {
 			console.log('test');
 			const response = await fetch('/api/dashboard'); // Your API endpoint
-			
+
 			if (!response.ok) {
 				throw new Error('Network response was not ok');
 			}
@@ -28,54 +28,67 @@
 <main class="Test">
 	<div class="ScreenCenter">
 		<h1>Fovo Fynsk</h1>
-		{#if error}
-			<div class="error">{error}</div>
-		{:else if data}
-			<div>
-				<h3>Total open tickets:</h3>
-				<h3>{data.total_open_tickets}</h3>
-			</div>
-			<div>
+		<div class="layout">
+			{#if error}
+				<div class="error">{error}</div>
+			{:else if data}
 				<div>
-					<h3>Open tickets:</h3>
-					<h3>{data.open_tickets}</h3>
+					<h3>Total open tickets:</h3>
+					<h3>{data.total_open_tickets}</h3>
 				</div>
+				<section>
+					<div>
+						<h3>Open tickets:</h3>
+						<h3>{data.open_tickets}</h3>
+					</div>
+					<div>
+						<h3>In progress tickets:</h3>
+						<h3>{data.in_progress_tickets}</h3>
+					</div>
+					<div>
+						<h3>Closed tickets:</h3>
+						<h3>{data.closed_tickets}</h3>
+					</div>
+				</section>
+
 				<div>
-					<h3>In progress tickets:</h3>
-					<h3>{data.in_progress_tickets}</h3>
+					<h3>High priority!!!:</h3>
+					<h3>{data.high_priority_tickets}</h3>
 				</div>
-				<div>
-					<h3>Closed tickets:</h3>
-					<h3>{data.closed_tickets}</h3>
-				</div>
-			</div>
-			<div>
-				<h3>High priority!!!:</h3>
-				<h3>{data.high_priority_tickets}</h3>
-			</div>
-		{:else}
-			<div>Loading...</div>
-		{/if}
+			{:else}
+				<div>Loading...</div>
+			{/if}
+		</div>
 	</div>
 </main>
 
 <style>
 	div {
 		display: flex;
-		justify-content: center;
 		align-items: center;
 	}
 
-	.ScreenCenter {
-		margin: 20vh auto 0;
+	section {
+		margin: 5vh;
+		padding: 1vh;
+		border: solid 3px black;
+		border-radius: 5px;
+		display: flex;
+		align-items: center;
 		flex-direction: column;
+	}
+
+	.ScreenCenter,
+	.layout {
+		flex-direction: column;
+		justify-content: baseline;
 	}
 
 	h1 {
 		font-size: 50px;
 		font-weight: 700;
 	}
-	
+
 	h3 {
 		font-size: 30px;
 	}

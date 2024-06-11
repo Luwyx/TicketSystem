@@ -21,13 +21,20 @@
 	});
 </script>
 
-{#if error}
-	<p>{error}</p>
-{:else if data}
-	<h2>{data.header}</h2> <!-- Assuming data has a title property -->
-	<p>{data.text}</p>
-	<p>{data.createData}</p>
-	<p>{data.version}</p>
-{:else}
-	<p>Loading...</p> <!-- Or any loading indicator -->
-{/if}
+<div>
+	{#if error}
+		<p>{error}</p>
+	{:else if data}
+		<h2>{data.header}</h2>
+		<!-- Assuming data has a title property -->
+		<p>{data.text}</p>
+		<p>{data.createData}</p>
+		<p>{data.version}</p>
+	{:else}
+		<p>Loading...</p>
+		<!-- Or any loading indicator -->
+	{/if}
+</div>
+
+<style>
+</style>
