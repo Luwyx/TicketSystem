@@ -62,20 +62,23 @@
     }
 }
 async function deleteTicket() {
-    try {
-        const response = await fetch(`/api/tickets/${id}`, {
-            method: 'DELETE'
-        });
+        try {
+            const confirmDelete = window.confirm("Are you sure you want to delete this ticket?");
+            if (confirmDelete) {
+                const response = await fetch(`/api/tickets/${id}`, {
+                    method: 'DELETE'
+                });
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                goto(`/tickets`);
+                // Handle successful deletion (e.g., redirect or show a success message)
+            }
+        } catch (err) {
+            error = 'Delete error: ' + err.message;
         }
-        goto(`/tickets`);
-        // Handle successful deletion (e.g., redirect or show a success message)
-    } catch (err) {
-        error = 'Delete error: ' + err.message;
     }
-}
 
 
 
