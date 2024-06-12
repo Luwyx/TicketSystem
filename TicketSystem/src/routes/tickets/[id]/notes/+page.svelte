@@ -31,6 +31,7 @@
         if (id) {
             fetchData();
         }
+        
     });
 </script>
 
@@ -82,41 +83,4 @@
         grid-column: 1 / 3;
     }
 
-    .info {
-        height: 100%;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-
-    .info p {
-        color: white;
-        background-color: #333;
-        border-radius: 5px;
-        padding: 10px;
-        text-align: center;
-        width: 100%;
-    }
-
-    button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: transparent;
-        width: 50px;
-        border: none;
-        padding: 5px;
-        border-radius: 15px;
-    }
-
-    button:hover {
-        background-color: #333;
-    }
-
-    svg {
-        fill: #333;
-        height: 50px;
-    }
-    button:hover svg {
-        fill: white !important;
-    }
 </style>
