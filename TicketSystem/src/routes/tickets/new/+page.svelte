@@ -35,7 +35,6 @@
     let error = null;
 
     async function submitData() {
-        console.log(ticket);
         try {
             const { assignedUserId, status, priority, header, text } = ticket;
 
