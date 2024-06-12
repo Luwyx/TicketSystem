@@ -92,10 +92,6 @@
 		background-color: #333;
 	}
 
-	button:hover svg {
-		fill: white !important;
-	}
-
 	.ticketFlex {
 		display: flex;
 		flex-direction: column;
@@ -146,13 +142,5 @@
 
 	button:hover {
 		background-color: #333;
-	}
-
-	svg {
-		fill: #333;
-		height: 50px;
-	}
-	button:hover svg {
-		fill: white !important;
 	}
 </style>
