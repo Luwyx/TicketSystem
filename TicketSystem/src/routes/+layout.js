@@ -1,4 +1,4 @@
-import { user } from '../stores.js';
+import { user, users, status, priority } from '../stores.js';
 
 let data = null;
 let error = null;
@@ -21,9 +21,60 @@ async function loadUser(fetch) {
         console.error(error);
     }
 }
+async function loadUsers(fetch) {
+    try {
+        const response = await fetch('/api/users'); // Your API endpoint
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();        
+		users.set(data);
+
+      
+
+    } catch (err) {
+        error = 'Fetch error: ' + err.message;
+        console.error(error);
+    }
+}
+async function loadStatus(fetch) {
+    try {
+        const response = await fetch('/api/status'); // Your API endpoint
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+		status.set(data);
+
+      
+
+    } catch (err) {
+        error = 'Fetch error: ' + err.message;
+        console.error(error);
+    }
+}
+async function loadPriority(fetch) {
+    try {
+        const response = await fetch('/api/priority'); // Your API endpoint
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+		priority.set(data);
+
+      
+
+    } catch (err) {
+        error = 'Fetch error: ' + err.message;
+        console.error(error);
+    }
+}
 
 export async function load({ url, fetch }) {
     await loadUser(fetch);
+    await loadUsers(fetch);
+    await loadStatus(fetch);
+    await loadPriority(fetch);
 
     let topbarContent = 'Fovo Fynsk';
 

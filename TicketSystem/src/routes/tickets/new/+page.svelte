@@ -1,17 +1,13 @@
 <script>
-    import { onMount } from 'svelte';
-    import { page } from '$app/stores';
-    import { get } from 'svelte/store';
     import { goto } from '$app/navigation';
-    import { users, status, priority } from '../../../../stores.js';
+	//import { user } from 'pg/lib/defaults.js';
+    import { user, users, status, priority } from '../../../stores.js';
 
-    let id = 0;
-    let ticket = {};
-    let error = null;
 
     let usersData = [];
     let statusesData = [];
     let prioritiesData = [];
+    let userData = null;
 
 
     users.subscribe(value => {
@@ -23,78 +19,51 @@
     priority.subscribe(value => {
 		prioritiesData = value;
 	});
-    
+    user.subscribe(value => {
+		userData = value;
+	});
 
+    let ticket = {
+        assignedUserId: '',
+        status: '',
+        priority: '',
+        header: '',
+        text: '',
+        createdUserId: userData.userId
+    };
 
-    async function fetchTicket() {
+    let error = null;
+
+    async function submitData() {
+        console.log(ticket);
         try {
-            const response = await fetch(`/api/tickets/${id}`); // Your API endpoint
+            const { assignedUserId, status, priority, header, text } = ticket;
+
+            // Check if any field is empty
+            if (!assignedUserId || !status || !priority || !header || !text) {
+                throw new Error('All fields are required');
+            }
+
+            const response = await fetch(`/api/tickets`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(ticket),
+            });
 
             if (!response.ok) {
-                throw new Error('Network response was not ok');
+                throw new Error('Network response was not ok') + JSON.stringify(ticket);
             }
-            const tempTicket = await response.json();
-            ticket = tempTicket[0];
-
+            goto(`/tickets`);
+            // Handle successful creation (e.g., redirect or show a success message)
         } catch (err) {
-            error = 'Fetch error: ' + err.message;
+            error = 'Submit error: ' + err.message;
         }
     }
-    
-    async function submitData() {
-    try {
-        const { assignedUserId, status, priority, header, text } = ticket;
-        const dataToSend = { assignedUserId, status, priority, header, text };
-
-        const response = await fetch(`/api/tickets/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dataToSend),
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok'  + JSON.stringify(dataToSend));
-        }
-        goto(`/tickets`);
-        // Handle successful update (e.g., redirect or show a success message)
-    } catch (err) {
-        error = 'Submit error: ' + err.message;
-    }
-}
-async function deleteTicket() {
-    try {
-        const response = await fetch(`/api/tickets/${id}`, {
-            method: 'DELETE'
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        goto(`/tickets`);
-        // Handle successful deletion (e.g., redirect or show a success message)
-    } catch (err) {
-        error = 'Delete error: ' + err.message;
-    }
-}
-
-
-
-
-
-    onMount(() => {
-        id = get(page).params.id;
-        if (id) {
-            fetchTicket();
-            //fetchUsers();
-            //fetchStatus();
-            //fetchPriority();
-        }
-    });
 </script>
 
 <!-- HTML goes here -->
 <main>
-    <h1>Edit Note {id}</h1>
+    <h1>Create New Ticket</h1>
     {#if error}
         <p>{error}</p>
     {:else}
@@ -102,6 +71,7 @@ async function deleteTicket() {
             <div>
                 <label for="assignedUserId">Assigned User:</label>
                 <select id="assignedUserId" bind:value={ticket.assignedUserId}>
+                    <option value="">Select User</option>
                     {#each usersData as user}
                         <option value={user.userId}>{user.firstName} {user.lastName}</option>
                     {/each}
@@ -110,6 +80,7 @@ async function deleteTicket() {
             <div>
                 <label for="status">Status:</label>
                 <select id="status" bind:value={ticket.status}>
+                    <option value="">Select Status</option>
                     {#each statusesData as status}
                         <option value={status.statusId}>{status.status}</option>
                     {/each}
@@ -118,6 +89,7 @@ async function deleteTicket() {
             <div>
                 <label for="priority">Priority:</label>
                 <select id="priority" bind:value={ticket.priority}>
+                    <option value="">Select Priority</option>
                     {#each prioritiesData as priority}
                         <option value={priority.priorityId}>{priority.priority}</option>
                     {/each}
@@ -133,7 +105,6 @@ async function deleteTicket() {
             </div>
             <div>
                 <button type="submit">Submit</button>
-                <button type="button" on:click={deleteTicket}>Delete</button>
                 <button type="button" on:click={() => goto(`/tickets`)}>Cancel</button>
             </div>
         </form>
