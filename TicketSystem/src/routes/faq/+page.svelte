@@ -26,7 +26,14 @@
 <!-- HTML goes here -->
 <main>
 	<body>
-		<h2>Welcome to FAQ</h2>
+		<button class="addButton">
+			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"
+				><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path
+					d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+				/></svg
+			>
+		</button>
+		<h2>List of FAQs</h2>
 		<br />
 		{#if error}
 			<p>{error}</p>
@@ -48,6 +55,35 @@
 
 <!-- CSS goes here -->
 <style>
+	svg {
+		fill: white;
+		height: 50px;
+		width: 50px;
+	}
+
+	.addButton {
+		position: absolute;
+		top: 3vh;
+		right: 4vh;
+	}
+
+	button {
+		background-color: transparent;
+		width: 50px;
+		height: 50px;
+		border: none;
+		padding: 5px;
+		border-radius: 15px;
+	}
+
+	button:hover {
+		background-color: #333;
+	}
+
+	button:hover svg {
+		fill: white !important;
+	}
+
 	.faqGrid {
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
