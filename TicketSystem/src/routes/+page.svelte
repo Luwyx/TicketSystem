@@ -34,26 +34,26 @@
 			{:else if data}
 				<div>
 					<h3>Total open tickets:</h3>
-					<h3>{data.total_open_tickets}</h3>
+					<h3 class="value">{data.total_open_tickets}</h3>
 				</div>
 				<section>
 					<div>
 						<h3>Open tickets:</h3>
-						<h3>{data.open_tickets}</h3>
+						<h3 class="value">{data.open_tickets}</h3>
 					</div>
 					<div>
 						<h3>In progress tickets:</h3>
-						<h3>{data.in_progress_tickets}</h3>
+						<h3 class="value">{data.in_progress_tickets}</h3>
 					</div>
 					<div>
 						<h3>Closed tickets:</h3>
-						<h3>{data.closed_tickets}</h3>
+						<h3 class="value">{data.closed_tickets}</h3>
 					</div>
 				</section>
 
 				<div>
-					<h3>High priority!!!:</h3>
-					<h3>{data.high_priority_tickets}</h3>
+					<h3>High priority:</h3>
+					<h3 class="value">{data.high_priority_tickets}</h3>
 				</div>
 			{:else}
 				<div>Loading...</div>
@@ -70,7 +70,7 @@
 
 	section {
 		margin: 5vh;
-		padding: 1vh;
+		padding: 1vh 1vw;
 		border: solid 3px black;
 		border-radius: 5px;
 		display: flex;
@@ -95,5 +95,12 @@
 
 	.error {
 		color: red;
+	}
+
+	.value {
+		background-color: #333;
+		color: white;
+		border-radius: 5px;
+		padding: 5px;
 	}
 </style>

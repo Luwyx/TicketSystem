@@ -53,6 +53,7 @@
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		grid-auto-rows: 1fr;
 		gap: 10px;
+		padding: 0 5px;
 	}
 
 	article {
