@@ -3,7 +3,7 @@
     import { page } from '$app/stores';
     import { get } from 'svelte/store';
     import { goto } from '$app/navigation';
-    import { users, status, priority } from '../../../../stores.js';
+    import { users, status, priority, supportLevel } from '../../../../stores.js';
 
     let id = 0;
     let ticket = {};
@@ -12,6 +12,7 @@
     let usersData = [];
     let statusesData = [];
     let prioritiesData = [];
+    let supportLevelData = [];
 
 
     users.subscribe(value => {
@@ -22,6 +23,9 @@
 	});
     priority.subscribe(value => {
 		prioritiesData = value;
+	});
+    supportLevel.subscribe(value => {
+		supportLevelData = value;
 	});
     
 
@@ -102,6 +106,14 @@ async function deleteTicket() {
         <p>{error}</p>
     {:else}
         <form on:submit|preventDefault={submitData}>
+            <div>
+                <label for="supportLevel">Support Level:</label>
+                <select id="supportLevel">
+                    {#each supportLevelData as user}
+                        <option value={user.supportLevelId}>{user.supportLevel}</option>
+                    {/each}
+                </select>
+            </div>
             <div>
                 <label for="assignedUserId">Assigned User:</label>
                 <select id="assignedUserId" bind:value={ticket.assignedUserId}>

@@ -1,4 +1,4 @@
-import { user, users, status, priority } from '../stores.js';
+import { user, users, status, priority, supportLevel } from '../stores.js';
 
 let data = null;
 let error = null;
@@ -69,13 +69,30 @@ async function loadPriority(fetch) {
         console.error(error);
     }
 }
+async function loadSupportLevel(fetch) {
+    try {
+        const response = await fetch('/api/supportLevel'); // Your API endpoint
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+		supportLevel.set(data);
+
+      
+
+    } catch (err) {
+        error = 'Fetch error: ' + err.message;
+        console.error(error);
+    }
+}
 
 export async function load({ url, fetch }) {
     await loadUser(fetch);
     await loadUsers(fetch);
     await loadStatus(fetch);
     await loadPriority(fetch);
-
+    await loadSupportLevel(fetch);
+     
     let topbarContent = 'Fovo Fynsk';
 
     switch (url.pathname) {
