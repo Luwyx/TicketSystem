@@ -179,9 +179,11 @@
 						<textarea id="noteText" bind:value={note.text}></textarea>
 					</div>
 					{#if noteFunction === 'Add note'}
-						<button type="button" on:click={() => submitData()}>Submit</button>
+						<button class="popupButton" type="button" on:click={() => submitData()}>Submit</button>
 					{:else if noteFunction === 'Edit note'}
-						<button type="button" on:click={() => submitEditedData()}>Save</button>
+						<button class="popupButton" type="button" on:click={() => submitEditedData()}
+							>Save</button
+						>
 					{/if}
 				</form>
 			</div>
@@ -331,5 +333,18 @@
 		width: 20px;
 		height: 20px;
 		font-size: 20px;
+	}
+
+	.popupButton {
+		width: fit-content;
+		height: fit-content;
+		margin: 10px 0;
+		padding: 5px;
+		border-radius: 5px;
+	}
+
+	.popupButton:hover {
+		background-color: #333;
+		color: white;
 	}
 </style>

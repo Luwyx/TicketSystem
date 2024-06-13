@@ -52,7 +52,7 @@
 			faq = {
 				header: faqToEdit.header,
 				text: faqToEdit.text,
-				userId: faqToEdit.userId,
+				userId: faqToEdit.userId
 			};
 		} else {
 			error = 'Faq not found.';
@@ -73,7 +73,6 @@
 	// Methode to create faq
 	async function submitData() {
 		try {
-
 			// Check if any field is empty
 			if (!faq.text) {
 				throw new Error('All fields are required');
@@ -100,7 +99,7 @@
 	async function submitEditedData() {
 		try {
 			const text = faq.text;
-		
+
 			const response = await fetch(`/api/faq/${selectedFaq.faqId}`, {
 				method: 'PUT', // Use PUT method for editing existing resource
 				headers: { 'Content-Type': 'application/json' },
@@ -173,9 +172,12 @@
 							<textarea id="faqText" bind:value={faq.text}></textarea>
 						</div>
 						{#if faqFunction === 'Add faq'}
-							<button type="button" on:click={() => submitData()}>Submit</button>
+							<button class="popupButton" type="button" on:click={() => submitData()}>Submit</button
+							>
 						{:else if faqFunction === 'Edit faq'}
-							<button type="button" on:click={() => submitEditedData()}>Save</button>
+							<button class="popupButton" type="button" on:click={() => submitEditedData()}
+								>Save</button
+							>
 						{/if}
 					</form>
 				</div>
@@ -297,9 +299,9 @@
 
 	.faqGrid {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		grid-auto-rows: 1fr;
-		gap: 2vh;
+		gap: 3vh;
 		padding: 0 5px;
 	}
 
@@ -345,7 +347,6 @@
 		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 		position: relative;
 		flex-direction: column;
-
 		z-index: 10000; /* Ensure the popup content is on top */
 	}
 
@@ -360,5 +361,16 @@
 		width: 20px;
 		height: 20px;
 		font-size: 20px;
+	}
+
+	.popupButton {
+		width: fit-content;
+		height: fit-content;
+		margin: 10px 0;
+	}
+
+	.popupButton:hover {
+		background-color: #333;
+		color: white;
 	}
 </style>
