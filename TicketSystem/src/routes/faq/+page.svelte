@@ -149,7 +149,7 @@
 		aspect-ratio: calc(1 / 1);
 		background-color: #666;
 		grid-template-columns: 1fr;
-		grid-auto-rows: 1fr auto 1 fr;
+		grid-auto-rows: 1fr auto 1fr;
 	}
 
 	h2 {
