@@ -56,7 +56,6 @@
 				header: faqToEdit.header,
 				text: faqToEdit.text,
 				userId: faqToEdit.userId,
-				ticketId: faqToEdit.ticketId
 			};
 		} else {
 			error = 'Faq not found.';
@@ -78,10 +77,9 @@
 	// Methode to create faq
 	async function submitData() {
 		try {
-			const text = faq.text;
 
 			// Check if any field is empty
-			if (!text) {
+			if (!faq.text) {
 				throw new Error('All fields are required');
 			}
 
@@ -106,11 +104,11 @@
 	async function submitEditedData() {
 		try {
 			const text = faq.text;
-			console.log(selectedFaq);
+		
 			const response = await fetch(`/api/faq/${selectedFaq.faqId}`, {
 				method: 'PUT', // Use PUT method for editing existing resource
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ text }) // Send only updated fields
+				body: JSON.stringify(faq) // Send only updated fields
 			});
 
 			if (!response.ok) {
