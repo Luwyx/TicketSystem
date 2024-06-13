@@ -11,7 +11,7 @@ export async function GET({ params }) {
         indexId = parseInt(id);
     }
     //return json('TEST')
-    return json(await getData('faq', indexId, 'faqId'));
+    return json(await getData('faqView', indexId, 'faqId'));
 }
 
 export async function DELETE({ params }){

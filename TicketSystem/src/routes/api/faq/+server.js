@@ -3,7 +3,7 @@ import { getData, createData } from '../baseApi';
 
 // This file is to get a list of all FAQ
 export async function GET() {
-    return json(await getData('faq'));
+    return json(await getData('faqView'));
 }
 
 // Create a faq

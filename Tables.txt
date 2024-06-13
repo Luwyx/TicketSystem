@@ -1,0 +1,518 @@
+-- Table: public.faq
+
+-- DROP TABLE IF EXISTS public.faq;
+
+CREATE TABLE IF NOT EXISTS public.faq
+(
+    "faqId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    header text COLLATE pg_catalog."default" NOT NULL,
+    text text COLLATE pg_catalog."default" NOT NULL,
+    "userId" integer NOT NULL,
+    "createTime" timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "isDeleted" boolean NOT NULL DEFAULT false,
+    CONSTRAINT faq_pkey PRIMARY KEY ("faqId"),
+    CONSTRAINT "userId_fkey" FOREIGN KEY ("userId")
+        REFERENCES public.users ("userId") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.faq
+    OWNER to postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Table: public.notes
+
+-- DROP TABLE IF EXISTS public.notes;
+
+CREATE TABLE IF NOT EXISTS public.notes
+(
+    "noteId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    text text COLLATE pg_catalog."default" NOT NULL,
+    "createTime" timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "userId" integer NOT NULL,
+    "ticketId" integer NOT NULL,
+    "isDeleted" boolean NOT NULL DEFAULT false,
+    CONSTRAINT notes_pkey PRIMARY KEY ("noteId"),
+    CONSTRAINT "ticketId_fkey" FOREIGN KEY ("ticketId")
+        REFERENCES public.ticket ("ticketId") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "userId_fkey" FOREIGN KEY ("userId")
+        REFERENCES public.users ("userId") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.notes
+    OWNER to postgres;
+
+
+
+
+
+
+
+
+
+
+
+-- Table: public.priority
+
+-- DROP TABLE IF EXISTS public.priority;
+
+CREATE TABLE IF NOT EXISTS public.priority
+(
+    "priorityId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    priority text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT priority_pkey PRIMARY KEY ("priorityId")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.priority
+    OWNER to postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Table: public.sla
+
+-- DROP TABLE IF EXISTS public.sla;
+
+CREATE TABLE IF NOT EXISTS public.sla
+(
+    "slaId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    header text COLLATE pg_catalog."default" NOT NULL,
+    text text COLLATE pg_catalog."default" NOT NULL,
+    "createData" timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    version text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT sla_pkey PRIMARY KEY ("slaId")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.sla
+    OWNER to postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Table: public.status
+
+-- DROP TABLE IF EXISTS public.status;
+
+CREATE TABLE IF NOT EXISTS public.status
+(
+    "statusId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    status text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT status_pkey PRIMARY KEY ("statusId")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.status
+    OWNER to postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Table: public.ticket
+
+-- DROP TABLE IF EXISTS public.ticket;
+
+CREATE TABLE IF NOT EXISTS public.ticket
+(
+    "ticketId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    "createdUserId" integer NOT NULL,
+    "assignedUserId" integer NOT NULL,
+    status integer NOT NULL,
+    priority integer NOT NULL,
+    header text COLLATE pg_catalog."default" NOT NULL,
+    text text COLLATE pg_catalog."default" NOT NULL,
+    "createTime" timestamp with time zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "isDeleted" boolean NOT NULL DEFAULT false,
+    CONSTRAINT ticket_pkey PRIMARY KEY ("ticketId"),
+    CONSTRAINT "assignedUserId_fkey" FOREIGN KEY ("assignedUserId")
+        REFERENCES public.users ("userId") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "createdUserId_fkey" FOREIGN KEY ("createdUserId")
+        REFERENCES public.users ("userId") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT priority_fkey FOREIGN KEY (priority)
+        REFERENCES public.priority ("priorityId") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT status_fkey FOREIGN KEY (status)
+        REFERENCES public.status ("statusId") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.ticket
+    OWNER to postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Table: public.users
+
+-- DROP TABLE IF EXISTS public.users;
+
+CREATE TABLE IF NOT EXISTS public.users
+(
+    "userId" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    "firstName" text COLLATE pg_catalog."default" NOT NULL,
+    "lastName" text COLLATE pg_catalog."default" NOT NULL,
+    email text COLLATE pg_catalog."default" NOT NULL,
+    "workPhone" text COLLATE pg_catalog."default",
+    "privatePhone" text COLLATE pg_catalog."default",
+    CONSTRAINT user_pkey PRIMARY KEY ("userId")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.users
+    OWNER to postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- View: public.allTickets
+
+-- DROP VIEW public."allTickets";
+
+CREATE OR REPLACE VIEW public."allTickets"
+ AS
+ SELECT a."ticketId",
+    a."createdUserId",
+    a."assignedUserId",
+    a.status,
+    a.priority,
+    a.header,
+    a.text,
+    a."createTime",
+    a."isDeleted",
+    b.status AS "statusName",
+    c.priority AS "priorityName"
+   FROM ticket a
+     JOIN status b ON a.status = b."statusId"
+     JOIN priority c ON a.priority = c."priorityId";
+
+ALTER TABLE public."allTickets"
+    OWNER TO postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- View: public.dashboard
+
+-- DROP VIEW public.dashboard;
+
+CREATE OR REPLACE VIEW public.dashboard
+ AS
+ SELECT count(*) FILTER (WHERE "isDeleted" = false AND status <> 3) AS total_open_tickets,
+    count(*) FILTER (WHERE "isDeleted" = false AND priority = 1) AS low_priority_tickets,
+    count(*) FILTER (WHERE "isDeleted" = false AND priority = 2) AS medium_priority_tickets,
+    count(*) FILTER (WHERE "isDeleted" = false AND priority = 3) AS high_priority_tickets,
+    count(*) FILTER (WHERE "isDeleted" = false AND status = 1) AS open_tickets,
+    count(*) FILTER (WHERE "isDeleted" = false AND status = 2) AS in_progress_tickets,
+    count(*) FILTER (WHERE "isDeleted" = false AND status = 3) AS closed_tickets
+   FROM ticket;
+
+ALTER TABLE public.dashboard
+    OWNER TO postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- View: public.newestSla
+
+-- DROP VIEW public."newestSla";
+
+CREATE OR REPLACE VIEW public."newestSla"
+ AS
+ SELECT "slaId",
+    header,
+    text,
+    "createData",
+    version
+   FROM sla
+  ORDER BY "createData" DESC
+ LIMIT 1;
+
+ALTER TABLE public."newestSla"
+    OWNER TO postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- View: public.userView
+
+-- DROP VIEW public."userView";
+
+CREATE OR REPLACE VIEW public."userView"
+ AS
+ SELECT u."userId",
+    u."firstName",
+    u."lastName",
+    u.email,
+    u."workPhone",
+    u."privatePhone",
+    count(*) FILTER (WHERE t."isDeleted" = false AND t.status <> 3) AS total_open_tickets,
+    count(*) FILTER (WHERE t."isDeleted" = false AND t.priority = 1) AS low_priority_tickets,
+    count(*) FILTER (WHERE t."isDeleted" = false AND t.priority = 2) AS medium_priority_tickets,
+    count(*) FILTER (WHERE t."isDeleted" = false AND t.priority = 3) AS high_priority_tickets,
+    count(*) FILTER (WHERE t."isDeleted" = false AND t.status = 1) AS new_tickets,
+    count(*) FILTER (WHERE t."isDeleted" = false AND t.status = 2) AS in_progress_tickets,
+    count(*) FILTER (WHERE t."isDeleted" = false AND t.status = 3) AS closed_tickets
+   FROM users u
+     LEFT JOIN ticket t ON u."userId" = t."assignedUserId"
+  GROUP BY u."userId";
+
+ALTER TABLE public."userView"
+    OWNER TO postgres;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
