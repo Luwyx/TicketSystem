@@ -52,6 +52,13 @@
 							<p>{ticket.statusName}</p>
 							<p>{ticket.priorityName}</p>
 						</div>
+						<div>
+							<!-- Put support level below -->
+							<p>1</p>
+							<!-- Put assigned used here -->
+							<p>ben dover</p>
+						</div>
+
 						<div class="buttons">
 							<button on:click={() => goto(`tickets/${ticket.ticketId}/edit`)}>
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
@@ -97,7 +104,7 @@
 	article {
 		display: grid;
 		gap: 5vw;
-		grid-template-columns: 1fr 1fr 0.5fr auto;
+		grid-template-columns: 1fr 1fr 0.5fr auto auto;
 	}
 
 	div {
