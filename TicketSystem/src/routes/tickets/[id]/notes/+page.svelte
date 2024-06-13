@@ -113,11 +113,11 @@
         togglePopup(null);
         fetchData();
     }
-    async function submitEditedData(noteId) {
+    async function submitEditedData() {
         try {
             const text = note.text;
-            console.log(noteId);
-            const response = await fetch(`/api/notes/${noteId}`, {
+            console.log(selectedNote);
+            const response = await fetch(`/api/notes/${selectedNote.noteId}`, {
                 method: 'PUT',  // Use PUT method for editing existing resource
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ text }),  // Send only updated fields
@@ -179,7 +179,11 @@
                     <label for="noteText">Note Text:</label>
                     <textarea id="noteText" bind:value={note.text}></textarea>
                 </div>
-                <button type="button" on:click={() => submitEditedData(note)}>Submit</button>
+                {#if noteFunction === 'Add note'}
+                    <button type="button" on:click={() => submitData()}>Submit</button>
+                {:else if noteFunction === 'Edit note'}
+                    <button type="button" on:click={() => submitEditedData()}>Save</button>
+                {/if}
             </form>            
         </div>
     </div>
