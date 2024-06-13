@@ -197,9 +197,9 @@
 		<p>No notes available.</p>
 	{:else}
 		<div class="ticketFlex">
+			<hr />
 			<!-- Insert tickets here -->
 			{#each data as note}
-				<hr />
 				<article>
 					<div class="content">
 						<h3>{note.text}</h3>
@@ -232,21 +232,16 @@
 <style>
 	.addSvg {
 		fill: white;
+		height: 50px;
+		width: 50px;
 	}
 
 	.addButton {
 		position: absolute;
 		top: 3vh;
 		right: 4vh;
-	}
-
-	button {
-		background-color: transparent;
 		width: 50px;
 		height: 50px;
-		border: none;
-		padding: 5px;
-		border-radius: 15px;
 	}
 
 	button:hover {
@@ -259,9 +254,12 @@
 	}
 
 	article {
-		display: grid;
+		display: flex;
 		gap: 5vw;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
+		justify-content: space-between;
+		border: 3px solid #333;
+		padding: 10px 15px;
+		border-radius: 15px;
 	}
 
 	div {
@@ -272,7 +270,6 @@
 
 	.content {
 		justify-content: space-evenly;
-		grid-column: 1 / 3;
 	}
 
 	button {
@@ -280,7 +277,8 @@
 		justify-content: center;
 		align-items: center;
 		background-color: transparent;
-		width: 50px;
+		width: 40px;
+		height: 40px;
 		border: none;
 		padding: 5px;
 		border-radius: 15px;
@@ -292,8 +290,8 @@
 
 	svg {
 		fill: #333;
-		height: 50px;
-		width: 50px;
+		height: 35px;
+		width: 35px;
 	}
 	button:hover svg {
 		fill: white !important;
@@ -332,5 +330,6 @@
 	span {
 		width: 20px;
 		height: 20px;
+		font-size: 20px;
 	}
 </style>
