@@ -66,7 +66,7 @@
 						<div class="spacer">
 							<div class="dateIDSpacer">
 								<p>{format(new Date(faq.createTime), 'dd-MM-yyyy HH:mm')}</p>
-								<p>User ID: {faq.userId}</p>
+								<p>{faq.fullName}</p>
 							</div>
 						</div>
 					</article>
