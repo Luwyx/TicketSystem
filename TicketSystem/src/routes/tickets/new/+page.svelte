@@ -1,27 +1,27 @@
 <script>
     import { goto } from '$app/navigation';
-	//import { user } from 'pg/lib/defaults.js';
-    import { user, users, status, priority } from '../../../stores.js';
-
+    import { user, users, status, priority, supportLevel } from '../../../stores.js';
 
     let usersData = [];
     let statusesData = [];
     let prioritiesData = [];
     let userData = null;
+    let supportLevelData = [];
+    let sortedUsers = [];
 
-
-    users.subscribe(value => {
-		usersData = value;
-	});
-    status.subscribe(value => {
-		statusesData = value;
-	});
-    priority.subscribe(value => {
-		prioritiesData = value;
-	});
-    user.subscribe(value => {
-		userData = value;
-	});
+    // Subscribe to store updates
+    users.subscribe(value => usersData = value);
+    status.subscribe(value => statusesData = value);
+    priority.subscribe(value => prioritiesData = value);
+    user.subscribe(value => userData = value);
+    supportLevel.subscribe(value => {
+        supportLevelData = value;
+        // Initialize sortedUsers with users from the first support level group
+        if (supportLevelData.length > 0) {
+            const firstSupportLevelId = supportLevelData[0].supportLevelId;
+            sortedUsers = usersData.filter(user => user.supportLevelId === firstSupportLevelId);
+        }
+    });
 
     let ticket = {
         assignedUserId: '',
@@ -35,28 +35,42 @@
     let error = null;
 
     async function submitData() {
-        try {
-            const { assignedUserId, status, priority, header, text } = ticket;
+    try {
+        const { assignedUserId, status, priority, header, text } = ticket;
 
-            // Check if any field is empty
-            if (!assignedUserId || !status || !priority || !header || !text) {
-                throw new Error('All fields are required');
-            }
-
-            const response = await fetch(`/api/tickets`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(ticket),
-            });
-
-            if (!response.ok) {
-                throw new Error('Network response was not ok') + JSON.stringify(ticket);
-            }
-            goto(`/tickets`);
-            // Handle successful creation (e.g., redirect or show a success message)
-        } catch (err) {
-            error = 'Submit error: ' + err.message;
+        // Check if any field is empty
+        if (!assignedUserId || !status || !priority || !header || !text) {
+            throw new Error('All fields are required');
         }
+
+        // Remove assignedUserSupportLevel from ticket object
+        const { assignedUserSupportLevel, ...ticketToSend } = ticket;
+
+        const response = await fetch(`/api/tickets`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(ticketToSend),
+        });
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        goto(`/tickets`);
+        // Handle successful creation (e.g., redirect or show a success message)
+    } catch (err) {
+        error = 'Submit error: ' + err.message;
+    }
+}
+
+
+    function handleSupportLevelChange(event) {
+        ticket.assignedUserSupportLevel = parseInt(event.target.value);
+        ticket.assignedUserId = ''; // Clear assignedUserId when support level changes
+        filterUsersBySupportLevel(); // Update the sorted users list
+    }
+
+    function filterUsersBySupportLevel() {
+        sortedUsers = usersData.filter(user => user.supportLevelId === ticket.assignedUserSupportLevel);
     }
 </script>
 
@@ -68,10 +82,18 @@
     {:else}
         <form on:submit|preventDefault={submitData}>
             <div>
+                <label for="supportLevel">Support Level:</label>
+                <select id="supportLevel" bind:value={ticket.assignedUserSupportLevel} on:change={handleSupportLevelChange}>
+                    {#each supportLevelData as level}
+                        <option value={level.supportLevelId}>{level.supportLevel}</option>
+                    {/each}
+                </select>
+            </div>
+            <div>
                 <label for="assignedUserId">Assigned User:</label>
                 <select id="assignedUserId" bind:value={ticket.assignedUserId}>
                     <option value="">Select User</option>
-                    {#each usersData as user}
+                    {#each sortedUsers as user}
                         <option value={user.userId}>{user.firstName} {user.lastName}</option>
                     {/each}
                 </select>
@@ -109,6 +131,7 @@
         </form>
     {/if}
 </main>
+
 
 <!-- CSS goes here -->
 <style>

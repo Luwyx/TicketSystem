@@ -13,22 +13,21 @@
     let statusesData = [];
     let prioritiesData = [];
     let supportLevelData = [];
-
+    let sortedUsers = [];
 
     users.subscribe(value => {
-		usersData = value;
-	});
+        usersData = value;
+        filterUsersBySupportLevel();
+    });
     status.subscribe(value => {
-		statusesData = value;
-	});
+        statusesData = value;
+    });
     priority.subscribe(value => {
-		prioritiesData = value;
-	});
+        prioritiesData = value;
+    });
     supportLevel.subscribe(value => {
-		supportLevelData = value;
-	});
-    
-
+        supportLevelData = value;
+    });
 
     async function fetchTicket() {
         try {
@@ -39,33 +38,39 @@
             }
             const tempTicket = await response.json();
             ticket = tempTicket[0];
+            filterUsersBySupportLevel(); // Filter users based on support level after fetching the ticket
 
         } catch (err) {
             error = 'Fetch error: ' + err.message;
         }
     }
-    
-    async function submitData() {
-    try {
-        const { assignedUserId, status, priority, header, text } = ticket;
-        const dataToSend = { assignedUserId, status, priority, header, text };
 
-        const response = await fetch(`/api/tickets/${id}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dataToSend),
-        });
-
-        if (!response.ok) {
-            throw new Error('Network response was not ok'  + JSON.stringify(dataToSend));
-        }
-        goto(`/tickets`);
-        // Handle successful update (e.g., redirect or show a success message)
-    } catch (err) {
-        error = 'Submit error: ' + err.message;
+    function filterUsersBySupportLevel() {
+        sortedUsers = usersData.filter(user => user.supportLevelId === ticket.assignedUserSupportLevel);
     }
-}
-async function deleteTicket() {
+
+    async function submitData() {
+        try {
+            const { assignedUserId, status, priority, header, text } = ticket;
+            const dataToSend = { assignedUserId, status, priority, header, text };
+
+            const response = await fetch(`/api/tickets/${id}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dataToSend),
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok' + JSON.stringify(dataToSend));
+            }
+            goto(`/tickets`);
+            // Handle successful update (e.g., redirect or show a success message)
+        } catch (err) {
+            error = 'Submit error: ' + err.message;
+        }
+    }
+
+    async function deleteTicket() {
         try {
             const confirmDelete = window.confirm("Are you sure you want to delete this ticket?");
             if (confirmDelete) {
@@ -84,40 +89,39 @@ async function deleteTicket() {
         }
     }
 
-
-
-
-
     onMount(() => {
         id = get(page).params.id;
         if (id) {
             fetchTicket();
-            //fetchUsers();
-            //fetchStatus();
-            //fetchPriority();
         }
     });
+
+    function handleSupportLevelChange(event) {
+        ticket.assignedUserSupportLevel = parseInt(event.target.value);
+        ticket.assignedUserId = ''; // Clear assignedUserId when support level changes
+        filterUsersBySupportLevel(); // Update the sorted users list
+    }
 </script>
 
 <!-- HTML goes here -->
 <main>
-    <h1>Edit Note {id}</h1>
+    <h1>Edit Ticket {id}</h1>
     {#if error}
         <p>{error}</p>
     {:else}
         <form on:submit|preventDefault={submitData}>
             <div>
                 <label for="supportLevel">Support Level:</label>
-                <select id="supportLevel">
-                    {#each supportLevelData as user}
-                        <option value={user.supportLevelId}>{user.supportLevel}</option>
+                <select id="supportLevel" bind:value={ticket.assignedUserSupportLevel} on:change={handleSupportLevelChange}>
+                    {#each supportLevelData as level}
+                        <option value={level.supportLevelId}>{level.supportLevel}</option>
                     {/each}
                 </select>
             </div>
             <div>
                 <label for="assignedUserId">Assigned User:</label>
                 <select id="assignedUserId" bind:value={ticket.assignedUserId}>
-                    {#each usersData as user}
+                    {#each sortedUsers as user}
                         <option value={user.userId}>{user.firstName} {user.lastName}</option>
                     {/each}
                 </select>
@@ -147,13 +151,14 @@ async function deleteTicket() {
                 <textarea id="text" bind:value={ticket.text}></textarea>
             </div>
             <div>
-                <button type="submit">Submit</button>
+                <button type="submit">Save</button>
                 <button type="button" on:click={deleteTicket}>Delete</button>
                 <button type="button" on:click={() => goto(`/tickets`)}>Cancel</button>
             </div>
         </form>
     {/if}
 </main>
+
 
 <!-- CSS goes here -->
 <style>
