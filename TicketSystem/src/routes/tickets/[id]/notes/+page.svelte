@@ -74,8 +74,6 @@
         }
     }
 
-
-
     let userData = null;
     user.subscribe(value => {
 		userData = value;
@@ -86,6 +84,8 @@
         userId: userData.userId,
         ticketId: get(page).params.id,
     };
+
+    // Methode to create note
     async function submitData() {
         try {
             const text = note.text; // Corrected access to note's text property
@@ -105,14 +105,15 @@
             if (!response.ok) {
                 throw new Error('Network response was not ok') + JSON.stringify(note);
             }
-            //goto(`/tickets`);
-            // Handle successful creation (e.g., redirect or show a success message)
+
         } catch (err) {
             error = 'Submit error: ' + err.message;
         }
         togglePopup(null);
         fetchData();
     }
+
+    // Methode to update note
     async function submitEditedData() {
         try {
             const text = note.text;
@@ -127,13 +128,14 @@
                 throw new Error('Network response was not ok');
             }
 
-            // Handle success (e.g., close popup, update data)
             togglePopup(null);
-            fetchData();  // Refresh data after edit
+            fetchData();
         } catch (err) {
             error = 'Submit error: ' + err.message;
         }
     }
+
+    // Methode to delete note
     async function deleteNote(noteId) {
         console.log(noteId);
         try {
@@ -278,21 +280,6 @@
 		grid-column: 1 / 3;
 	}
 
-	.info {
-		height: 100%;
-		justify-content: space-evenly;
-		align-items: center;
-	}
-
-	.info p {
-		color: white;
-		background-color: #333;
-		border-radius: 5px;
-		padding: 10px;
-		text-align: center;
-		width: 100%;
-	}
-
 	button {
 		display: flex;
 		justify-content: center;
@@ -344,5 +331,10 @@
         top: 10px;
         right: 10px;
         cursor: pointer;
+    }
+
+    span {
+        width: 20px;
+        height: 20px;
     }
 </style>
