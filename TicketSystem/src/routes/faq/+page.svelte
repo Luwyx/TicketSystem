@@ -219,10 +219,8 @@
 						<p class="faqText">{faq.text}</p>
 
 						<div class="spacer">
-							<div class="dateIDSpacer">
-								<p>{format(new Date(faq.createTime), 'dd-MM-yyyy HH:mm')}</p>
-								<p>{faq.fullName}</p>
-							</div>
+							<p>{format(new Date(faq.createTime), 'dd-MM-yyyy HH:mm')}</p>
+							<p>{faq.fullName}</p>
 						</div>
 					</article>
 				{/each}
@@ -259,16 +257,14 @@
 
 	.spacer {
 		justify-content: space-between;
-	}
-
-	.dateIDSpacer {
-		display: flex;
-		justify-content: space-between;
-		gap: 5px;
+		gap: 15px;
 	}
 
 	.faqText {
 		margin: 10px 0;
+		background-color: #333;
+		padding: 10px;
+		border-radius: 10px;
 	}
 
 	.addButton {
@@ -309,13 +305,14 @@
 	}
 
 	article {
+		display: grid;
 		border: 3px solid #666;
 		border-radius: 10px;
 		padding: 10px;
 		aspect-ratio: calc(1 / 1);
 		background-color: #666;
 		grid-template-columns: 1fr;
-		grid-auto-rows: 1fr auto 1fr;
+		grid-auto-rows: auto 1fr auto;
 	}
 
 	h2 {
