@@ -70,8 +70,8 @@
 
 	section {
 		margin: 5vh;
-		padding: 1vh 1vw;
-		border: solid 3px black;
+		padding: 2vh 4vw;
+		border: solid 3px #333;
 		border-radius: 5px;
 		display: flex;
 		align-items: center;
@@ -98,9 +98,9 @@
 	}
 
 	.value {
-		background-color: #333;
+		background-color: rgba(51, 51, 51, 0.5);
 		color: white;
 		border-radius: 5px;
-		padding: 5px;
+		padding: 0 5px;
 	}
 </style>

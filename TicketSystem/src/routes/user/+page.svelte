@@ -2,11 +2,11 @@
 <script>
 	//import { SetTopbarContent } from '../+layout.svelte';
 	import { onMount } from 'svelte';
-    import { user } from '../../stores.js';
-    
+	import { user } from '../../stores.js';
+
 	let data = null;
 
-    user.subscribe(value => {
+	user.subscribe((value) => {
 		data = value;
 	});
 </script>
@@ -72,7 +72,7 @@
 	}
 
 	.iconholder {
-		width: 5vw;
+		width: 50px;
 	}
 
 	.tickets {
