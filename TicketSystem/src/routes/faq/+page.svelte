@@ -20,9 +20,6 @@
 		}
 	}
 
-
-
-
 	let showPopup = false;
 
 	let selectedFaq = null;
@@ -63,7 +60,6 @@
 		}
 	}
 
-
 	let userData = null;
 	user.subscribe((value) => {
 		userData = value;
@@ -72,7 +68,7 @@
 	let faq = {
 		header: '',
 		text: '',
-		userId: userData.userId,
+		userId: userData.userId
 	};
 
 	// Methode to create faq
@@ -170,11 +166,11 @@
 					<h2>{faqFunction}</h2>
 					<!-- Add faq form -->
 					<form>
-						<div>
+						<div class="addPopup">
 							<label for="faqHeader">Faq header:</label>
 							<textarea id="faqHeader" bind:value={faq.header}></textarea>
 						</div>
-						<div>
+						<div class="addPopup">
 							<label for="faqText">Faq Text:</label>
 							<textarea id="faqText" bind:value={faq.text}></textarea>
 						</div>
@@ -273,6 +269,11 @@
 		right: 4vh;
 	}
 
+	.addPopup {
+		display: flex;
+		flex-direction: column;
+	}
+
 	button {
 		background-color: transparent;
 		width: 25px;
@@ -325,8 +326,6 @@
 		color: white;
 	}
 
-
-
 	/* Popup styles */
 	.popup-container {
 		position: fixed;
@@ -347,6 +346,8 @@
 		border-radius: 10px;
 		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 		position: relative;
+		flex-direction: column;
+
 		z-index: 10000; /* Ensure the popup content is on top */
 	}
 
@@ -360,5 +361,6 @@
 	span {
 		width: 20px;
 		height: 20px;
+		font-size: 20px;
 	}
 </style>
