@@ -510,6 +510,24 @@ ALTER TABLE public."userView"
 
 
 
+-- View: public.notesView
+
+-- DROP VIEW public."notesView";
+
+CREATE OR REPLACE VIEW public."notesView"
+ AS
+ SELECT n."noteId",
+    n.text,
+    n."createTime",
+    n."userId",
+    n."ticketId",
+    n."isDeleted",
+    (u."firstName" || ' '::text) || u."lastName" AS "fullName"
+   FROM notes n
+     JOIN users u ON n."userId" = u."userId";
+
+ALTER TABLE public."notesView"
+    OWNER TO postgres;
 
 
 
