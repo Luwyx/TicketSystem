@@ -52,7 +52,7 @@
 							<p>{ticket.statusName}</p>
 							<p>{ticket.priorityName}</p>
 						</div>
-						<div>
+						<div class="info">
 							<!-- Put support level below -->
 							<p>Support level: {ticket.assignedUserSupportLevel}</p>
 							<!-- Put assigned used here -->
@@ -103,8 +103,8 @@
 
 	article {
 		display: grid;
-		gap: 5vw;
-		grid-template-columns: 1fr 1fr 0.5fr auto auto;
+		gap: 3vw;
+		grid-template-columns: 1fr 1fr 0.4fr 0.7fr auto;
 	}
 
 	div {
