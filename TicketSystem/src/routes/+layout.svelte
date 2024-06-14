@@ -2,7 +2,6 @@
 	import Navbar from '../lib/navbar.svelte';
 	import Topbar from '../lib/topbar.svelte';
 
-
 	export let data;
 </script>
 
@@ -22,7 +21,7 @@
 	.grid-container {
 		display: grid;
 		grid-template-rows: 15vh 1fr;
-		grid-template-columns: max-content 1fr;
+		grid-template-columns: 20vw 1fr;
 		min-height: 100vh;
 	}
 	.topbar {
