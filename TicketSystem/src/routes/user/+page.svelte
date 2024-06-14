@@ -45,6 +45,9 @@
 				<p>
 					Private Phone: {#if data !== null && data.privatePhone !== null}{data.privatePhone}{:else}N/A{/if}
 				</p>
+				<p>
+					Support level: {#if data !== null && data.supportLevel !== null}{data.supportLevel}{:else}N/A{/if}
+				</p>
 			</div>
 			<hr />
 			<div class="tickets">
