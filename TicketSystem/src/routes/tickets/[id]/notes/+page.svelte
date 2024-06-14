@@ -205,7 +205,7 @@
 				<article>
 					<div class="content">
 						<h3>{note.text}</h3>
-						<p>{note.userId}</p>
+						<p>{note.fullName}</p>
 						<p>{format(new Date(note.createTime), 'dd-MM-yyyy HH:mm')}</p>
 					</div>
 					<div class="buttons">
