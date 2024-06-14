@@ -5,7 +5,7 @@ let error = null;
 
 async function loadUser(fetch) {
     try {
-        const response = await fetch('/api/users/2'); // Your API endpoint
+        const response = await fetch('/api/users/1'); // Your API endpoint
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

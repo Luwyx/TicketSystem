@@ -7,7 +7,7 @@
 </script>
 
 <div class="Sidebar">
-	<h1><a class="Title" href="./">Fovo Fynsk</a></h1>
+	<h1><a class="Title" href="/">Fovo Fynsk</a></h1>
 	<nav>
 		<a href="/user">User</a>
 		<a href="/tickets">Tickets</a>
