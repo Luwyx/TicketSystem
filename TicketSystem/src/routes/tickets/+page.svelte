@@ -54,9 +54,9 @@
 						</div>
 						<div>
 							<!-- Put support level below -->
-							<p>1</p>
+							<p>Support level: {ticket.assignedUserSupportLevel}</p>
 							<!-- Put assigned used here -->
-							<p>ben dover</p>
+							<p>Assigned: {ticket.fullName}</p>
 						</div>
 
 						<div class="buttons">
