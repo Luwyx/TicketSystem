@@ -275,9 +275,9 @@
 	}
 
 	article {
-		display: flex;
-		gap: 5vw;
-		justify-content: space-between;
+		display: grid;
+		gap: 2vw;
+		grid-template-columns: 1fr min-content;
 		border: 3px solid #333;
 		padding: 10px 15px;
 		border-radius: 15px;
